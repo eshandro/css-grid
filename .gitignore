@@ -1,0 +1,7 @@
+# ignore node modules
+node_modules
+
+# ignore bower components
+public/lib
+bower_components
+

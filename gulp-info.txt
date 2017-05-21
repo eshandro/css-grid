@@ -1,0 +1,200 @@
+Gulp is task runner based on streams.
+
+It is built on vinyl-fs.
+
+Pipe different streams together to accomplish tasks.
+
+Current version of Gulp is 3.9. However, version 4 is production ready and offers a few different ways of doing things that are helpful.
+
+The core is still the same, but version 4 offers the ability to do tasks in parallel or series.  Note the current version of the CLI works on both 3 & 4 and can be installed globally. You want to install gulp locally always:
+
+npm install gulp-cli -g
+npm install gulpjs/gulp.git#4.0 --save-dev
+(This installs version 4 from github ... version 4 is likely to be release soon)
+
+
+To start a project - npm init and set up your basic build folder structure, maybe something like:
+src/scripts and src/styles
+public/scripts and public/styles
+
+If you have a complicated gulpfile.js, you may further organize by breaking up the file into multiple files, so you'd have a build folder as well. More about that later.
+
+Note: must have gulpfile.js at the root of your project
+
+Define gulp tasks:
+The default task is a special task -- if we run gulp without specifying a task, it runs the default task
+
+gulp tasks always return a stream
+
+basic structure of a gulp task
+The 3 most commonly used gulp methods are here:
+gulp.task, gulp.src, and gulp.dest
+the other commonly used one is gulp.watch
+gulp.task("default", function() {
+	return gulp
+		.src()
+		// tasks will go here pipe pipe
+		.pipe(babel())
+		.pipe(gulp.dest())
+});
+
+src and dest:
+You can glob (node-glob)
+.src("./src/scripts/**/*.js") ... the ** means this folder and subfolders as well
+.src("./src/scripts/**/*.{js,ts}") ... you can also do an array of globs
+
+Plugins:
+If you want to do it there is a likely a gulp- task for it. Just search gulp- in npm.
+
+A very handy one is gulp-load-plugins: It allows you to load all your gulp plugins that are in your package json rather than load all individually
+$ = require("gulp-load-plugins")
+
+Using babel:
+don't forget .babelrc file or you can pass that as a param when you call babel({presets:["es2015"]})
+{
+	"presets": "[es2015]"
+}
+npm install --save-dev gulp-babel babel-preset-es2015
+
+gulp-sourcemaps
+gulp-autoprefixer
+options: https://github.com/ai/browserslist#queries
+e.g.
+Function autoprefixer(options) returns new PostCSS plugin. See PostCSS API for plugin usage documentation.
+
+var plugin = autoprefixer({ browsers: ['> 1%', 'IE 7'], cascade: false });
+There are 4 options:
+
+browsers (array): list of browsers, which are supported in your project. You can directly specify browser version (like IE 7) or use selections (like last 2 version or > 5%). See Browserslist docs for available queries and default value.
+cascade (boolean): should Autoprefixer use Visual Cascade, if CSS is uncompressed. Default: true
+add (boolean): should Autoprefixer add prefixes. Default is true.
+remove (boolean): should Autoprefixer [remove outdated] prefixes. Default is true.
+supports (boolean): should Autoprefixer add prefixes for @supports parameters. Default is true.
+flexbox (boolean|string): should Autoprefixer add prefixes for flexbox properties. With "no-2009" value Autoprefixer will add prefixes only for final and IE versions of specification. Default is true.
+grid (boolean): should Autoprefixer add IE prefixes for Grid Layout properties. Default is true.
+stats (object): custom usage statistics for > 10% in my stats browsers query.
+Plugin object has info() method for debugging purpose.
+
+You can use PostCSS processor to process several CSS files to increase performance.
+
+gulp-clean-css (used to be gulp-minify-css -> deprecated)
+gulp-uglify 
+gulp-concat
+
+
+How to run muliple tasks:
+Can be run in Series or Parallel (in Gulp 4)
+You can check on tasks by running gulp --tasks
+// gulp.task("default", gulp.series(devStyles, devScripts));
+// The gulp.series, gulp.parellel only available in gulp 4
+// You can combine them as well
+// gulp.task("default", 
+// 	gulp.series(
+// 		cleanTask,
+// 		gulp.parallel(
+// 			devStyles, devScripts),
+// 	otherTaksSeries)
+// );
+// You see the way it will run via gulp --tasks
+gulp.task("default", gulp.parallel(devStyles, devScripts));
+
+
+How to organize your tasks:
+Keep your tasks simple and clean - do one thing
+
+Use a config for commonly used values, abstract values:
+const config = {
+	styles: {
+		src: ["./src/styles/site.less"],
+		dest: "./public/styles",
+		autoprefixer: ['IE 9', 'last 2 versions'],
+	},
+
+	scripts: {
+		src: ["./src/scripts/**/*.js"],
+		dest: "./public/scripts",
+		bundle: "app.js",
+	}
+};
+
+Then define your tasks:
+gulp.task("dev:styles", devStyles);
+gulp.task("dev:scripts", devScripts);
+gulp.task("dev", gulp.parallel(devStyles, devScripts));
+
+
+gulp.task("prod:styles", prodStyles);
+gulp.task("prod:scripts", prodScripts);
+gulp.task("prod", 
+	gulp.parallel(
+		"prod:scripts",
+		"prod:styles"
+	)
+);
+
+gulp.task("default", gulp.series("dev"));
+
+Below define the actual gulp functions. You can use the config variable -- config.styles.src etc.
+
+
+gulp.watch ... is another built in gulp method:
+Monitors directories and when a file changes it runs a task.
+Example:
+function devWatch() {
+	// gulp.watch(a file path, a task)
+	gulp.watch(config.styles.srcDirectory, gulp.series(devStyles));
+	gulp.watch(config.scripts.src, gulp.series(devScripts));
+}
+// Note: We run a dev build before we start the watch
+gulp.task("dev:watch", gulp.series("dev", devWatch));
+
+note: gulp-cached will allow you to set up watch so that it watch only compiles the JS files that changed, not all.
+
+
+
+LiveReload:
+gulp-livereload + Chrome add on - extension
+npm install gulp-livereload --save
+To use add to your watch task $.livereload.listen() -- this starts the livereload server
+function devWatch() {
+	$.livereload.listen();
+	// gulp.watch(a file path, a task)
+	gulp.watch(config.styles.srcDirectory, gulp.series(devStyles));
+	gulp.watch(config.scripts.src, gulp.series(devScripts));
+}
+
+Then, in the any task you want to watch:
+after everything including gulp.dest
+.pipe($.livereload());
+e.g.
+function devScripts() {
+	return gulp
+		.src(config.scripts.src)
+		.pipe($.sourcemaps.init())
+		.pipe($.babel())
+		.pipe($.sourcemaps.write('.')) //sourcemaps.write() = internal map
+		.pipe(gulp.dest(config.scripts.dest))
+		.pipe($.livereload());
+}
+
+Note that you must be running server like http-server
+
+Note: CSS hot reloads, but JS requires a refresh of the page
+
+
+If you have a lot of tasks, you may want to organize into individual files.
+Organization:
+Create a Build folder/directory
+You can require in all the files or utilize an NPM package called require-dir. require-dir loads all the files in a directory and executes the files.
+
+Each of the individual files will need to require in gulp and the gulp-load-plugins - also a config file if you have one.
+
+Then, your gulpfile.js file just needs to use require-dir to execute all the files in the given directory:
+// Using require-dir npm package
+// install require-dir --save-dev
+// 
+require('require-dir')('./build', {
+	recurse: true
+});
+
+
