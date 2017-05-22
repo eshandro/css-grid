@@ -1,14 +1,22 @@
 /*	Variables
 -----------------------------*/
-@container-max-width: 1200px;
-
 // Media Breaks
-@screen-small: 480px;
-@screen-medium: 768px;
-@screen-large: 1030px;
-@screen-ex-large: 1200px;
+@screen-mobile-only: 600px;
+@screen-tablet-portrait-up: 600px;
+@screen-tablet-landscape-up: 900px;
+@screen-desktop-up: 1200px;
+@screen-large-desktop-up: 1800px;
 
-@custom-media-small: ~"only screen and (min-width:" @screen-small~")";
-@custom-media-medium: ~"only screen and (min-width:" @screen-medium~")";
-@custom-media-large: ~"only screen and (min-width:" @screen-large~")";
-@custom-media-ex-large: ~"only screen and (min-width:" @screen-ex-large~")";
+// Container margins
+@container-margin: 0 1%;
+@container-margin-tablet-portrait-up: 0 4%;
+@container-margin-tablet-landscape-up: 0 8%;
+@container-margin-width-desktop-up: 0 12%;
+@container-margin-large-desktop-up: 0 18%;
+
+// Media queries
+@custom-media-mobile-only: ~"only screen and (max-width:" @screen-mobile-only~")";
+@custom-media-tablet-portrait-up: ~"only screen and (min-width:" @screen-tablet-portrait-up~")";
+@custom-media-tablet-landscape-up: ~"only screen and (min-width:" @screen-tablet-landscape-up~")";
+@custom-media-desktop-up: ~"only screen and (min-width:" @screen-desktop-up~")";
+@custom-media-large-desktop-up: ~"only screen and (min-width:" @screen-large-desktop-up~")";
