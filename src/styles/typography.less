@@ -7,11 +7,17 @@ Base font styles
 @base-line-height: 1.5;
 @header-line-height: 1.2;
 
+@base-font-family: 'Gentium Book Basic', serif;
+@alternate-content-font-family: 'Lato', sans-serif;
+@header-font-family: 'Open Sans', sans-serif;
+@alternate-header-font-family: 'Rubik', sans-serif;
+
+
 html, body {
   font-size: @base-font-size;
   line-height: @base-line-height;
   font-weight: 400;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: @alternate-content-font-family;
   color: #222;
 
 /*  @media @custom-media-mobile-only {
@@ -31,7 +37,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 1.25rem;
   font-weight: 600;
-  line-height: @header-line-height; 
+  line-height: @header-line-height;
+  font-family: @alternate-header-font-family; 
 }
 
 h1 { font-size: 2.5rem; letter-spacing: -.0625rem;}
