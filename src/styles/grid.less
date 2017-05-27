@@ -1,63 +1,21 @@
 @import "screensize";
 
-.container {
+#pageContainer {
 	height: 100vh;
 	background: transparent;
 }
 
-header {
-	margin-bottom: 10px;
-}
-
-.mainheader {
-	grid-area: header;
-	padding: 10px;
-	background-color: yellow;
-}
-
-.sideNav {
-	grid-area: sidenav;
-	padding: 10px;
-	min-width: 160px;
-	background-color: papayawhip;
-}
-
-.mainContent {
-	grid-area: main;
-	padding: 10px;
-	background-color: lightskyblue;
-}
-
-.mainContentWrapper {
-	margin: @mainContent-margin;
-}
-
-.mainfooter {
-	grid-area: footer;
-	background-color: #666;
-	color: #fff;
-	padding: 10px;
-}
-
-.rightWidget {
-	min-width: 250px;
-}
-
 @media @custom-media-tablet-portrait-up {
 
-	.container {
+	#pageContainer {
 		display: grid;
-		grid-template-columns: 20% 55% 25%;
+		grid-template-columns: 25% 1fr 25%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 
 		"header header header"
 		"sidenav main main"
 		"footer footer footer";
-		grid-column-gap: 1%;
-	}
-
-	.mainContentWrapper {
-		margin: @mainContent-margin-tablet-portrait-up;
+		grid-column-gap: .5rem;
 	}
 
 	.panels  {
@@ -72,15 +30,113 @@ header {
 }
 
 @media @custom-media-tablet-landscape-up {
-	.mainContentWrapper {
-		margin: @mainContent-margin-tablet-landscape-up;
+	#pageContainer {
+		display: grid;
+		grid-template-columns: 24% 1fr 25%;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas: 
+		"header header header"
+		"sidenav main main"
+		"footer footer footer";
+		grid-column-gap: .7rem;
 	}
 }
 
 @media @custom-media-desktop-up {
-	#widgetPage.container {
+	#pageContainer {
+		display: grid;
+		grid-template-columns: 21% 1fr 25%;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas: 
+		"header header header"
+		"sidenav main main"
+		"footer footer footer";
+		grid-column-gap: 1rem;
+	}
+}
+
+@media @custom-media-large-desktop-up {
+	#pageContainer {
+		display: grid;
+		grid-template-columns: 20% 1fr 25%;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas: 
+		"header header header"
+		"sidenav main main"
+		"footer footer footer";
+		grid-column-gap: 1.5rem;
+	}
+}
+.mainheader {
+	grid-area: header;
+	padding: 10px;
+	background-color: yellow;
+}
+
+#sideNavWrapper {
+	grid-area: sidenav;
+	padding: 5px;
+	// min-width: 160px;
+	background-color: papayawhip;
+	margin-left: @mainContent-margin;
+	
+	@media @custom-media-tablet-portrait-up {
+		margin-left: @mainContent-margin-tablet-portrait-up;
+	}
+	@media @custom-media-tablet-landscape-up {
+		margin-left: @mainContent-margin-tablet-landscape-up;
+		padding: 10px;
+	}
+	@media @custom-media-desktop-up {
+		margin-left: @mainContent-margin-desktop-up;
+		padding: 10px;
+	}
+	@media @custom-media-large-desktop-up {
+		margin-left: @mainContent-margin-large-desktop-up;
+		padding: 10px;
+	}
+}
+
+#mainContentWrapper {
+	grid-area: main;
+	padding: 5px;
+	background-color: lightskyblue;
+	margin-right: @mainContent-margin;
+	
+	@media @custom-media-tablet-portrait-up {
+		margin-right: @mainContent-margin-tablet-portrait-up;
+	}
+	@media @custom-media-tablet-landscape-up {
+		margin-right: @mainContent-margin-tablet-landscape-up;
+		padding: 10px;
+	}
+	@media @custom-media-desktop-up {
+		margin-right: @mainContent-margin-desktop-up;
+		padding: 10px;
+	}
+	@media @custom-media-large-desktop-up {
+		margin-right: @mainContent-margin-large-desktop-up;
+		padding: 10px;
+	}
+}
+
+
+.mainfooter {
+	grid-area: footer;
+	background-color: #666;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+#rightWidgetWrapper {
+	// min-width: 250px;
+}
+
+@media @custom-media-desktop-up {
+	#widgetPage #pageContainer {
 		display:grid;
-		grid-template-columns:  20% 60% 20%;
+		grid-template-columns:  20% 1fr 20%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 
 		"header header header"
@@ -88,15 +144,12 @@ header {
 		"footer footer footer";
 		grid-column-gap: 2%;
 	}
-	.mainContentWrapper {
-		margin: @mainContent-margin-desktop-up;
-	}
 }
 
 @media @custom-media-large-desktop-up {
-	#widgetPage.container {
+	#widgetPage #pageContainer {
 		display:grid;
-		grid-template-columns:  20% 60% 20%;
+		grid-template-columns:  20% 1fr 20%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 
 		"header header header"
@@ -104,14 +157,11 @@ header {
 		"footer footer footer";
 		grid-column-gap: 3%;
 	}
-	.mainContentWrapper {
-		margin: @mainContent-margin-large-desktop-up;
-	}
 }
 
 // Widget pages with right side widgets
 @media @custom-media-desktop-up {
-	#widgetPage.container {
+	#widgetPage #pageContainer {
 		display:grid;
 		grid-template-columns:  20% 60% 20%;
 		grid-template-rows: auto 1fr auto;
@@ -120,9 +170,7 @@ header {
 		"sidenav main aside"
 		"footer footer footer";
 	}
-	.mainContentWrapper {
-		margin: @mainContent-margin-desktop-up;
-	}
+
 }
 
 

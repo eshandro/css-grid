@@ -17,23 +17,32 @@
 		<div id="pageBackground">
 			<div id="dynamicBackground"></div>
 		</div>
-		<div class="container">
+		<div id="pageContainer">
 			<header class="mainheader">
 				<h1>Example layout</h1>
 			</header>
    
-			<div class="sideNav">
-				<nav>
-					<ul>
-						<li><a href="">Link One</a></li>
-						<li><a href="">Link Two</a></li>
-						<li><a href="">Link Three</a></li>
-						<li><a href="">Link Four</a></li>
-					</ul>
-				</nav>
+			<div id="sideNavWrapper">
+				<div class="sideNav">
+					<div class="sideNav_logo">
+						<h3>Navigation</h3>
+					</div>
+					<nav class="sideNav_nav">
+						<ul>
+							<li class="active"><a href="">Section Home</a></li>
+							<li><a href="">Page One</a></li>
+							<li><a href="">Page Number Two</a></li>
+							<li><a href="">Another Page - Three</a></li>
+						</ul>
+					</nav>
+					<div class="sideNav_profile">
+						<img src="images/profile-pic-es.jpg" alt="Profile Pic">
+						<h4>Erik Shandrowski</h4>
+					</div>
+				</div>
 			</div>
 
-			<div class="mainContent">
+			<div id="mainContentWrapper">
 				<p>This is an example layout using the Skeleton Framework but replacing the Skeleton Grid with Grid Layout, and also using Flexbox for elements.</p>
 
 				<ul class="panels">
