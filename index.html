@@ -11,21 +11,22 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400|Rubik:400,700,900" rel="stylesheet">
 		<!-- Style Sheets -->
 		<link href="public/lib/normalize-css/normalize.css" rel="stylesheet">
+		<!-- <link rel="stylesheet" href="public/lib/typeplate/typeplate.css"> -->
 		<link href="public/styles/site.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="pageBackground">
-			<div id="dynamicBackground"></div>
-		</div>
 		<div id="pageContainer">
-			<header class="mainheader">
+			<div id="pageBackground">
+				<div id="dynamicBackground"></div>
+			</div>
+			<header class="mainHeader">
 				<h1>Example layout</h1>
 			</header>
    
 			<div id="sideNavWrapper">
 				<div class="sideNav">
 					<div class="sideNav_logo">
-						<h3>Navigation</h3>
+						<h4>Navigation</h4>
 					</div>
 					<nav class="sideNav_nav">
 						<ul>
@@ -37,12 +38,12 @@
 					</nav>
 					<div class="sideNav_profile">
 						<img src="images/profile-pic-es.jpg" alt="Profile Pic">
-						<h4>Erik Shandrowski</h4>
+						<h5>Erik Shandrowski</h5>
 					</div>
 				</div>
 			</div>
 
-			<div id="mainContentWrapper">
+			<main id="mainContentWrapper">
 				<p>This is an example layout using the Skeleton Framework but replacing the Skeleton Grid with Grid Layout, and also using Flexbox for elements.</p>
 
 				<ul class="panels">
@@ -56,14 +57,21 @@
 						<p>Aliquam a convallis nulla. Nam mollis mauris urna, et dapibus lacus aliquam vel.</p>
 					</li>
 				</ul>
-			</div>
+			</main>
 
 		
-			<footer class="mainfooter">
+			<footer class="mainFooter">
 				<p>Footer</p>
+				<div style="display:flex"><span style="margin-left: auto;"><a href="#modal-overlay">Open Modal</a></span></div>
 			</footer>
 		</div>
-
-
+		<!-- <div id="modal-wrapper" class="modalHidden"><div class="modal">Stuff in the modal</div></div> -->
+		<div id="modal-overlay" class="modalHidden">
+			<div class="modal">
+				<a href="#close" class="modal-close noHover">&times;</a>
+				<h4>Stuff in the modal</h4>
+				<p>Content will be full screen on mobile view</p>
+			</div>
+		</div>
 	</body>
 </html>
