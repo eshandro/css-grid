@@ -1,22 +1,104 @@
-@import "screensize";
 
-#pageContainer {
+#secondaryPageContainer {
 	height: 100vh;
 	background: transparent;
 }
 
-@media @custom-media-tablet-portrait-up {
 
-	#pageContainer {
+@supports (display: grid) {
+	.gridContainer {
 		display: grid;
-		grid-template-columns: 25% 1fr 25%;
-		grid-template-rows: auto 1fr auto;
-		grid-template-areas: 
-		"header header header"
-		"sidenav main main"
-		"footer footer footer";
-		grid-column-gap: .5rem;
 	}
+	#secondaryPageContainer {
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr 1fr auto;
+		grid-template-areas: 
+		"header"
+		"sidenav"
+		"main"
+		"footer";
+		grid-column-gap: .25rem;
+	}
+	#mainHeaderContainer {
+		grid-area: header;
+	}
+
+	#sideNavContainer {
+		grid-area: sidenav;
+		padding: 5px;
+		// min-width: 160px;
+		margin: 0 @mainContent-margin;
+		margin-bottom: 10px;
+	}
+
+	#mainContentContainer {
+		grid-area: main;
+		padding: 5px;
+		margin: 0 @mainContent-margin;
+	}
+	#mainFooterContainer {
+		grid-area: footer;
+	}
+}
+
+
+@media @custom-media-tablet-portrait-up {
+	#secondaryPageContainer {
+		margin: 0 -.25rem;
+		padding: 0;
+	}
+	
+	#mainHeaderContainer,
+	#mainFooterContainer {
+		float: left;
+		padding: 10px;
+		margin: 0 .25rem;
+	}
+
+	#sideNavContainer, 
+	#mainContentContainer  {
+		float: left;
+		padding: 10px;
+		margin: 0 .25rem;
+	}
+	#mainHeaderContainer {
+		width: calc(100% - .5rem);
+	}
+	#sideNaveContainer {
+		width: calc(21% - .5rem);
+	}
+	#mainContentContainer {
+		width: calc(79% - .5rem);
+	}
+	#mainFooterContainer {
+		width: calc(100% - .5rem);
+	}
+	@supports (display: grid) {
+		#secondaryPageContainer {
+			grid-template-columns: 25% 1fr 25%;
+			grid-template-rows: auto 1fr auto;
+			grid-template-areas: 
+			"header header header"
+			"sidenav main main"
+			"footer footer footer";
+			grid-column-gap: .5rem;
+		}
+		#mainHeaderContainer, 
+		#sideNavContainer,
+		#mainContentContainer,
+		#mainFooterContainer {
+			width: auto;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		#sideNavContainer {
+			margin-left: @mainContent-margin-tablet-portrait-up;
+		}
+		#mainContentContainer {
+			margin-right: @mainContent-margin-tablet-portrait-up;
+		}
+	}
+
 
 	.panels  {
 		display: flex;
@@ -30,103 +112,200 @@
 }
 
 @media @custom-media-tablet-landscape-up {
-	#pageContainer {
-		display: grid;
-		grid-template-columns: 24% 1fr 25%;
-		grid-template-rows: auto 1fr auto;
-		grid-template-areas: 
-		"header header header"
-		"sidenav main main"
-		"footer footer footer";
-		grid-column-gap: .7rem;
+	#secondaryPageContainer {
+		margin: 0 -.75rem;
+		padding: 0;
+	}
+	
+	#mainHeaderContainer,
+	#mainFooterContainer {
+		float: left;
+		padding: 10px;
+		margin: 0 .75rem;
+	}
+
+	#sideNavContainer, 
+	#mainContentContainer  {
+		float: left;
+		padding: 10px;
+		margin: 0 .75rem;
+	}
+	#mainHeaderContainer {
+		width: calc(100% - 1.5rem);
+	}
+	#sideNaveContainer {
+		width: calc(21% - 1.5rem);
+	}
+	#mainContentContainer {
+		width: calc(79% - 1.5rem);
+	}
+	#mainFooterContainer {
+		width: calc(100% - 1.5rem);
+	}
+
+	@supports (display: grid) {
+		#secondaryPageContainer {
+			grid-template-columns: 24% 1fr 25%;
+			grid-template-rows: auto 1fr auto;
+			grid-template-areas: 
+			"header header header"
+			"sidenav main main"
+			"footer footer footer";
+			grid-column-gap: .7rem;
+		}
+		#mainHeaderContainer, 
+		#sideNavContainer,
+		#mainContentContainer,
+		#mainFooterContainer {
+			width: auto;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		#sideNavContainer {		
+			margin-left: @mainContent-margin-tablet-landscape-up;
+			padding: 10px;
+		}
+		#mainContentContainer {
+			margin-right: @mainContent-margin-tablet-landscape-up;
+			padding: 10px;
+		}
 	}
 }
 
 @media @custom-media-desktop-up {
-	#pageContainer {
-		display: grid;
-		grid-template-columns: 21% 1fr 25%;
-		grid-template-rows: auto 1fr auto;
-		grid-template-areas: 
-		"header header header"
-		"sidenav main main"
-		"footer footer footer";
-		grid-column-gap: 1rem;
+	#secondaryPageContainer {
+		margin: 0 -1rem;
+		padding: 0;
+	}
+	
+	#mainHeaderContainer,
+	#mainFooterContainer {
+		float: left;
+		padding: 10px;
+		margin: 0 1rem;
+	}
+
+	#sideNavContainer, 
+	#mainContentContainer  {
+		float: left;
+		padding: 10px;
+		margin: 0 1rem;
+	}
+	#mainHeaderContainer {
+		width: calc(100% - 2rem);
+	}
+	#sideNaveContainer {
+		width: calc(21% - 2rem);
+	}
+	#mainContentContainer {
+		width: calc(79% - 2rem);
+	}
+	#mainFooterContainer {
+		width: calc(100% - 2rem);
+	}
+
+	@supports (display: grid) {
+		#secondaryPageContainer {
+			grid-template-columns: 21% 1fr 25%;
+			grid-template-rows: auto 1fr auto;
+			grid-template-areas: 
+			"header header header"
+			"sidenav main main"
+			"footer footer footer";
+			grid-column-gap: 1rem;
+			margin: 0;
+		}
+		#mainHeaderContainer, 
+		#sideNavContainer,
+		#mainContentContainer,
+		#mainFooterContainer {
+			width: auto;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		#sideNavContainer {		
+			margin-left: @mainContent-margin-desktop-up;
+			padding: 10px;
+		}
+		#mainContentContainer {
+			margin-right: @mainContent-margin-desktop-up;
+			padding: 10px;
+		}
+
 	}
 }
 
 @media @custom-media-large-desktop-up {
-	#pageContainer {
-		display: grid;
-		grid-template-columns: 20% 1fr 25%;
-		grid-template-rows: auto 1fr auto;
-		grid-template-areas: 
-		"header header header"
-		"sidenav main main"
-		"footer footer footer";
-		grid-column-gap: 1.5rem;
+	#secondaryPageContainer {
+		margin: 0 -1.5rem;
+		padding: 0;
 	}
-}
-
-.mainHeader {
-	grid-area: header;
-}
-
-#sideNavWrapper {
-	grid-area: sidenav;
-	padding: 5px;
-	// min-width: 160px;
-	margin-left: @mainContent-margin;
 	
-	@media @custom-media-tablet-portrait-up {
-		margin-left: @mainContent-margin-tablet-portrait-up;
-	}
-	@media @custom-media-tablet-landscape-up {
-		margin-left: @mainContent-margin-tablet-landscape-up;
+	#mainHeaderContainer,
+	#mainFooterContainer {
+		float: left;
 		padding: 10px;
+		margin: 0 1.5rem;
 	}
-	@media @custom-media-desktop-up {
-		margin-left: @mainContent-margin-desktop-up;
-		padding: 10px;
-	}
-	@media @custom-media-large-desktop-up {
-		margin-left: @mainContent-margin-large-desktop-up;
-		padding: 10px;
-	}
-}
 
-#mainContentWrapper {
-	grid-area: main;
-	padding: 5px;
-	margin-right: @mainContent-margin;
-	
-	@media @custom-media-tablet-portrait-up {
-		margin-right: @mainContent-margin-tablet-portrait-up;
-	}
-	@media @custom-media-tablet-landscape-up {
-		margin-right: @mainContent-margin-tablet-landscape-up;
+	#sideNavContainer, 
+	#mainContentContainer  {
+		float: left;
 		padding: 10px;
+		margin: 0 1.5rem;
 	}
-	@media @custom-media-desktop-up {
-		margin-right: @mainContent-margin-desktop-up;
-		padding: 10px;
+	#mainHeaderContainer {
+		width: calc(100% - 3rem);
 	}
-	@media @custom-media-large-desktop-up {
-		margin-right: @mainContent-margin-large-desktop-up;
-		padding: 10px;
+	#sideNaveContainer {
+		width: calc(21% - 3rem);
 	}
-}
-.mainFooter {
-	grid-area: footer;
+	#mainContentContainer {
+		width: calc(79% - 3rem);
+	}
+	#mainFooterContainer {
+		width: calc(100% - 3rem);
+	}
+
+	@supports (display: grid) {
+		#secondaryPageContainer {
+			grid-template-columns: 20% 1fr 25%;
+			grid-template-rows: auto 1fr auto;
+			grid-template-areas: 
+			"header header header"
+			"sidenav main main"
+			"footer footer footer";
+			grid-column-gap: 1.5rem;
+		}
+		#mainHeaderContainer, 
+		#sideNavContainer,
+		#mainContentContainer,
+		#mainFooterContainer {
+			width: auto;
+			margin-left: 0;
+			margin-right: 0;
+		}
+		#sideNavContainer {		
+			margin-left: @mainContent-margin-large-desktop-up;
+			padding: 10px;
+		}
+		#mainContentContainer {
+			margin-right: @mainContent-margin-large-desktop-up;
+			padding: 10px;
+		}
+
+	}
+
 }
 
 #rightWidgetWrapper {
 	// min-width: 250px;
 }
-
+/*
+	Below needs a rewrite - maybe used for subsite homepages/branded pages/etc
+ */
 @media @custom-media-desktop-up {
-	#widgetPage #pageContainer {
-		display:grid;
+	#widgetPage #secondaryPageContainer {
 		grid-template-columns:  20% 1fr 20%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 
@@ -138,8 +317,7 @@
 }
 
 @media @custom-media-large-desktop-up {
-	#widgetPage #pageContainer {
-		display:grid;
+	#widgetPage #secondaryPageContainer {
 		grid-template-columns:  20% 1fr 20%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 
@@ -152,8 +330,7 @@
 
 // Widget pages with right side widgets
 @media @custom-media-desktop-up {
-	#widgetPage #pageContainer {
-		display:grid;
+	#widgetPage #secondaryPageContainer {
 		grid-template-columns:  20% 60% 20%;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 

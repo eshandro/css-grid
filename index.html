@@ -15,15 +15,15 @@
 		<link href="public/styles/site.css" rel="stylesheet">
 	</head>
 	<body>
-		<div id="pageContainer">
-			<div id="pageBackground">
-				<div id="dynamicBackground"></div>
-			</div>
-			<header class="mainHeader">
+		<div id="pageBackground">
+			<div id="dynamicBackground"></div>
+		</div>
+		<div id="secondaryPageContainer" class="gridContainer">
+			<header id="mainHeaderContainer">
 				<h1>Example layout</h1>
 			</header>
    
-			<div id="sideNavWrapper">
+			<div id="sideNavContainer">
 				<div class="sideNav">
 					<div class="sideNav_logo">
 						<h4>Navigation</h4>
@@ -43,7 +43,7 @@
 				</div>
 			</div>
 
-			<main id="mainContentWrapper">
+			<main id="mainContentContainer">
 				<p>This is an example layout using the Skeleton Framework but replacing the Skeleton Grid with Grid Layout, and also using Flexbox for elements.</p>
 
 				<ul class="panels">
@@ -58,14 +58,12 @@
 					</li>
 				</ul>
 			</main>
-
 		
-			<footer class="mainFooter">
+			<footer id="mainFooterContainer">
 				<p>Footer</p>
 				<div style="display:flex"><span style="margin-left: auto;"><a href="#modal-overlay">Open Modal</a></span></div>
 			</footer>
 		</div>
-		<!-- <div id="modal-wrapper" class="modalHidden"><div class="modal">Stuff in the modal</div></div> -->
 		<div id="modal-overlay" class="modalHidden">
 			<div class="modal">
 				<a href="#close" class="modal-close noHover">&times;</a>
