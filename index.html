@@ -9,10 +9,12 @@
 		<!-- Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Gentium+Book+Basic|Open+Sans" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Lato:300,400|Rubik:400,700,900" rel="stylesheet">
+		
 		<!-- Style Sheets -->
 		<link href="public/lib/normalize-css/normalize.css" rel="stylesheet">
 		<!-- <link rel="stylesheet" href="public/lib/typeplate/typeplate.css"> -->
 		<link href="public/styles/site.css" rel="stylesheet">
+
 	</head>
 	<body>
 		<div id="pageBackground">
@@ -61,15 +63,31 @@
 		
 			<footer id="mainFooterContainer">
 				<p>Footer</p>
-				<div style="display:flex"><span style="margin-left: auto;"><a href="#modal-overlay">Open Modal</a></span></div>
+				<div style="display:flex">
+					<span style="margin-left: auto;">
+						<!-- Use <a> tag if css only modal in use -->
+						<!-- <a href="#modal-cssonly-overlay">Open Modal</a> -->
+						<button id="open-modal">Open Modal</button>
+					</span>
+				</div>
 			</footer>
 		</div>
-		<div id="modal-overlay" class="modalHidden">
-			<div class="modal">
-				<a href="#close" class="modal-close noHover">&times;</a>
-				<h4>Stuff in the modal</h4>
-				<p>Content will be full screen on mobile view</p>
+		<!-- Use the below div if css only modal in use -->
+		<!-- <div id="modal-cssonly-overlay" class="modal-hidden modal-cssonly-overlay"> -->
+		<div id="modal-overlay" class="modal-hidden modal-overlay">
+			<div id="modal" class="modal" role="dialog" aria-labelledby="modal-title">
+				<!-- Use the below <a> tag if css only modal in use -->
+				<!-- <a href="#" class="modal-close noHover">&times;</a> -->
+				<button id="close-modal" class="close-modal">&times;</button>
+				<div class="modal-contents">
+					<h4 id="modal-title">Stuff in the modal</h4>
+					<p>Content will be full screen on mobile view</p>
+				</div>
 			</div>
 		</div>
+		
+		<!-- Scripts -->
+		<script src="public/scripts/modal.js"></script>
+
 	</body>
 </html>

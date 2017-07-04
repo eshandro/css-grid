@@ -1,0 +1,72 @@
+
+
+.modal-cssonly-overlay, .modal-overlay {
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top:0;right:0;bottom:0;left:0;
+	background: rgba(0,0,0,.6);
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 500ms ease-in;
+	z-index: -999999;
+}
+
+.modal-overlay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	z-index: 99999;
+}
+
+.modal-overlay.modal-hidden, .modal-cssonly-overlay.modal-hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.modal {
+	position: relative;
+	width: 55%;
+	padding: 1.5em;
+	background: #fff;
+	@media @custom-media-mobile-only {
+		width: 100%;
+	}
+	@media @custom-media-desktop-up {
+		width: 65%;
+	}
+}
+
+.modal-contents {
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+
+}
+
+.close-modal {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: @tangerine;
+	color: white;
+	font-size: 40px;
+	padding: 6px 10px 10px 10px;
+	text-align: center;
+	border: none;
+	cursor: pointer;
+}
+
+/*	The below can be used to do modal with CSS only. 
+	Requires the open button to be an <a> with an href="#modal-cssonly-overlay" */
+.modal-cssonly-overlay {
+	&:target {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0;
+		z-index: 99999;		
+	}
+}
