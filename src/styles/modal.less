@@ -1,8 +1,8 @@
 
 
 .modal-cssonly-overlay, .modal-overlay {
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 	position: fixed;
 	top:0;right:0;bottom:0;left:0;
 	background: rgba(0,0,0,.6);
@@ -10,14 +10,18 @@
 	visibility: visible;
 	transition: opacity 500ms ease-in;
 	z-index: -999999;
+	// overflow-x: hidden;
+	// overflow-y: auto;
+	// -webkit-overflow-scrolling: touch;
 }
 
 .modal-overlay {
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	/*	Use margin: auto on flex item instead to prevent issue when flex item's content overflows container*/
+	// align-items: center;
+	// justify-content: center;
 	margin: 0;
-	padding: 0;
+	padding: 1em 0 0;
 	z-index: 99999;
 }
 
@@ -28,21 +32,40 @@
 
 .modal {
 	position: relative;
-	width: 55%;
+	/*	Use margin: auto on flex item instead of align-items: center; justify-content: center on 
+	flex container to prevent issue when flex item's content overflows container*/
+	margin: auto;
+	width: 98%;
 	padding: 1.5em;
+	padding-right: 42px;
 	background: #fff;
-	@media @custom-media-mobile-only {
-		width: 100%;
+	@media @custom-media-tablet-portrait-up {
+		width: 540px
+	}
+	@media @custom-media-tablet-landscape-up {
+		width: 600px
 	}
 	@media @custom-media-desktop-up {
-		width: 65%;
+		width: 660px;
 	}
 }
 
 .modal-contents {
-	overflow-y: scroll;
+	max-height: 80vh;
+	overflow-x: hidden;
+	overflow-y: auto;
 	-webkit-overflow-scrolling: touch;
-
+	// Allow for srollbar
+	padding-right: 0.95em;
+	@media @custom-media-tablet-portrait-up {
+		max-height: 70vh;
+	}
+	@media @custom-media-tablet-landscape-up {
+		max-height: 75vh;
+	}
+	@media @custom-media-desktop-up {
+		max-height: 85vh;
+	}
 }
 
 .close-modal {
@@ -51,11 +74,21 @@
 	top: 0;
 	background-color: @tangerine;
 	color: white;
-	font-size: 40px;
+	font-size: 36px;
 	padding: 6px 10px 10px 10px;
 	text-align: center;
 	border: none;
 	cursor: pointer;
+}
+
+#modal-title {
+	min-height: 50px;
+	border-bottom: 1px solid fade(@aluminium, 80%);
+
+}
+
+.noScroll {
+	overflow: hidden;
 }
 
 /*	The below can be used to do modal with CSS only. 
