@@ -9,10 +9,6 @@
 	opacity: 1;
 	visibility: visible;
 	transition: opacity 500ms ease-in;
-	z-index: -999999;
-	// overflow-x: hidden;
-	// overflow-y: auto;
-	// -webkit-overflow-scrolling: touch;
 }
 
 .modal-overlay {
@@ -26,6 +22,7 @@
 }
 
 .modal-overlay.modal-hidden, .modal-cssonly-overlay.modal-hidden {
+	z-index: -999999;
 	opacity: 0;
 	visibility: hidden;
 }
@@ -37,8 +34,9 @@
 	margin: auto;
 	width: 98%;
 	padding: 1.5em;
-	padding-right: 42px;
-	background: #fff;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;	background: #fff;
 	@media @custom-media-tablet-portrait-up {
 		width: 540px
 	}
@@ -52,11 +50,6 @@
 
 .modal-contents {
 	max-height: 80vh;
-	overflow-x: hidden;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
-	// Allow for srollbar
-	padding-right: 0.95em;
 	@media @custom-media-tablet-portrait-up {
 		max-height: 70vh;
 	}
@@ -72,6 +65,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
+	z-index: 11;
 	background-color: @tangerine;
 	color: white;
 	font-size: 36px;
@@ -87,8 +81,9 @@
 
 }
 
+// Used on body to prevent scrolling of rest of the page when modal is open
 .noScroll {
-	overflow: hidden;
+	overflow-y: hidden;
 }
 
 /*	The below can be used to do modal with CSS only. 
